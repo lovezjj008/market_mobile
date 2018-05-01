@@ -15,7 +15,7 @@
     <div>
       <goods-classify :categorylist = "categoryList"></goods-classify>
     </div>  
-    <div>
+    <div style="height:400px">
        <visited-list></visited-list>
     </div>
   </div>     

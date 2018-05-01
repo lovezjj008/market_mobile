@@ -87,7 +87,7 @@ export default {
 <style scoped lang="less">
   .child-view {
     position: absolute;
-    transition: all .4s cubic-bezier(.55,0,.1,1);
+    transition: all .3s cubic-bezier(.55,0,.1,1);
     top: 0;
     bottom: 0;
     left: 0;

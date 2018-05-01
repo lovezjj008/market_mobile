@@ -5,6 +5,9 @@
       <chunk-title :title = "title"></chunk-title>
     </div>
     <div>
+      <div v-if = "categorylist.length === 0">
+         <svg-component v-for = "n in 2" :key= "n"></svg-component> 
+      </div> 
       <ul class="classifylist clear">
         <li v-for = "iteam in categorylist" :key = "iteam.category_id" class="classifyiteam b-bottom-right-1 ">
           <div class="ellipsis categtiele">{{iteam.category_name}}</div>
@@ -22,15 +25,22 @@
 
 <script>
 import chunkTitle from '@/components/chunktitle'
+import svgComponent from '@/components/skeletonScreen/goodslist'
 export default {
   data () {
     return {
       title: '商品分类'
     }
   },
-  props: ['categorylist'],
+  props: {
+    categorylist: {  // 必须提供字段
+      required: true,
+      default: []
+    }
+  },
   components: {
-    chunkTitle
+    chunkTitle,
+    svgComponent
   }
 }
 

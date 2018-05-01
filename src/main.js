@@ -9,6 +9,7 @@ import 'mint-ui/lib/style.css'
 import './css/common.less'
 import httpServer from '@/config/httpServer'
 import App from './App'
+import FastClick from 'fastclick'
 
 Vue.prototype.axios = httpServer
 Vue.use(MintUI)
@@ -20,6 +21,7 @@ router.beforeEach((to, from, next) => {
   }
   next()
 })
+FastClick.attach(document.body)
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

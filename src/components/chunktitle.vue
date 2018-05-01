@@ -1,7 +1,9 @@
 <template>
-   <div class="classify-title text-center border-bottom-1px">
+  <div class="b-bottom-1">
+   <div class=" classify-title text-center">
         <hr class="center-hr">
         <span class="title">{{title}}</span>
+       </div> 
     </div>
 </template>
 <script>
@@ -14,6 +16,9 @@
     }
 </script>
 <style lang="less" scoped>
+    .b-bottom-1{
+        padding-bottom: 1px;
+    }
   .classify-title {
     font-size: .65rem;
     padding: .5rem 0;
@@ -30,7 +35,7 @@
         display: inline-block;
         width: 60%;
         border: 0;
-        border-top: .025rem dashed #ddd;
+        border-top: .025rem solid #ddd;
         position: absolute;
         left: 50%;
         margin-left: -30%;
