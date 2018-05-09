@@ -1,11 +1,11 @@
 <!--  -->
 <template>
-  <div>
+  <div>   
      <div class="search-suggest">
-      <mt-search id="mintsearch" placeholder= "请输入关键字" v-model= "searchVal"  ref = "mintsearch">
-        <mt-cell class="search-suggestlist" v-for = "(iteam, index) in suggest" :key= "index" :title = "iteam.name">
-        </mt-cell>
-      </mt-search>
+       <mt-search  @sure = "sureFn" @cancel = "cancelF" placeholder= "请输入关键字" v-model= "searchVal" cancelText = '返回'>
+          <mt-cell class="search-suggestlist" v-for = "(iteam, index) in suggest" :key= "index" :title = "iteam.name">
+         </mt-cell>  
+       </mt-search>  
     </div>
   </div>
 </template>
@@ -13,7 +13,7 @@
 <script>
 import $ from 'jquery';
 import _ from 'lodash';
-import { Search } from 'mint-ui';
+import mtSearch from '@/components/searchInput'
 import {getsearchsuggest} from '@/servies/search';
 import { Toast } from 'mint-ui';
 export default {
@@ -23,15 +23,11 @@ export default {
       suggest: []
     }
   },
-  components: {},
+  components: {
+    mtSearch
+  },
   mounted () {
-    var self = this
-    this.$nextTick(function () {
-      // DOM 更新了
-      $('#mintsearch').find('.mint-searchbar-cancel').on('click', function() {
-        self.$router.go(-1)
-      })
-    })
+   
   },
   computed: {},
   watch: {
@@ -40,6 +36,12 @@ export default {
     }
   },
   methods: {
+    cancelF () {
+      this.$router.go(-1)
+    },
+    sureFn (){
+      alert(1)
+    },
     querySuggest: _.debounce(function () {
       let malltype = 'ORDINARY'
       let keyword = this.searchVal.trim()
@@ -60,11 +62,15 @@ export default {
 }
 </script>
 
-<style lang='less' scoped>
+<style lang='less'>
+
 .search-suggest {
   font-size: .7rem;
   .mintui-search{
     margin-right: .25rem;
+  }
+  .mint-cell-wrapper .mint-cell-title{
+    font-size: .7rem;
   }
 }
 .search-suggestlist{

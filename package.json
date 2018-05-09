@@ -5,7 +5,7 @@
   "author": "zjj",
   "private": true,
   "scripts": {
-    "dev": "webpack-dev-server --inline --host 192.168.1.7 --progress --config  build/webpack.dev.conf.js ",
+    "dev": "webpack-dev-server --inline --port 8086 --progress --config  build/webpack.dev.conf.js ",
     "start": "npm run dev",
     "unit": "jest --config test/unit/jest.conf.js --coverage",
     "e2e": "node test/e2e/runner.js",

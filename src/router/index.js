@@ -6,6 +6,7 @@ const Goodsclass = r => require.ensure([], () => r(require('@/pages/goodsclass')
 const Shopcar = r => require.ensure([], () => r(require('@/pages/shopcar')), 'shopcar')
 const Myinfo = r => require.ensure([], () => r(require('@/pages/myinfo')), 'myinfo')
 const Search = r => require.ensure([], () => r(require('@/pages/searchpage')), 'search')
+const Searchlist = r => require.ensure([], () => r(require('@/pages/searchlist')), 'searchlist')
 
 VueRouter.prototype.goBack = function () {
   this.isBack = true
@@ -57,6 +58,14 @@ const routes = [
           transitionName: 'slide'
         },
         component: Search
+      },
+      {
+        path: '/searchlist',
+        name: 'searchlist',
+        meta: {
+          transitionName: 'slide'
+        },
+        component: Searchlist
       }
     ]
   }

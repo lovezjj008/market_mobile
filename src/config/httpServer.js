@@ -1,5 +1,4 @@
 import axios from 'axios'
-import qs from 'qs'
 import { Toast, Indicator } from 'mint-ui'
 
 const baseURL = '/'
@@ -43,18 +42,15 @@ const httpServer = (opts, data) => {
     isloading: opts.isloading || false,
     timeout: opts.timeout || 30000,
     params: Object.assign(Public, data),
-    data: qs.stringify(Object.assign(Public, data)),
-    headers: opts.method === 'get' ? {
+    data: JSON.stringify(Object.assign(Public, data)),
+    headers: {
       'X-Requested-With': 'XMLHttpRequest',
       'Accept': 'application/json',
       'Content-Type': 'application/json; charset=UTF-8'
-    } : {
-      'X-Requested-With': 'XMLHttpRequest',
-      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
     }
   }
 
-  if (opts.method === 'get') {
+  if (opts.method === 'get' || opts.method === 'GET') {
     delete httpDefaultOpts.data
   } else {
     delete httpDefaultOpts.params
