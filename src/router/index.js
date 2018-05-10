@@ -63,7 +63,8 @@ const routes = [
         path: '/searchlist',
         name: 'searchlist',
         meta: {
-          transitionName: 'slide'
+          transitionName: 'slide',
+          footerShow: false
         },
         component: Searchlist
       }

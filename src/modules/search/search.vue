@@ -40,7 +40,7 @@ export default {
       this.$router.go(-1)
     },
     sureFn (){
-      alert(1)
+      this.$router.push('searchlist')
     },
     querySuggest: _.debounce(function () {
       let malltype = 'ORDINARY'

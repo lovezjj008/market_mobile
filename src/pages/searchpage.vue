@@ -1,7 +1,9 @@
 <!--  -->
 <template>
   <div ref="search">
-    <search></search>
+    <div class="contentbox">
+       <search></search>
+    </div>
   </div>
 </template>
 

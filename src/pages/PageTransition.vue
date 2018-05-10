@@ -11,7 +11,7 @@
         <router-view class="child-view" v-if="!$route.meta.keepAlive"></router-view>
       </transition>
     </div>
-    <mt-tabbar v-model="selected" class="footerNav" :fixed = "true">
+    <mt-tabbar v-show = 'footerShow'  v-model="selected" class="footerNav" :fixed = "true">
       <mt-tab-item id="home" @click.native="handleClick" > 
         <div slot="icon" class = "icon fa fa-home"> </div>
         <div >首页</div>       
@@ -44,10 +44,16 @@ export default {
     return {
       mode: 'out-in',
       transitionName: 'router-fade',
-      selected: this.$store.state.global.footernav_select
+      selected: this.$store.state.global.footernav_select,
+      footerShow: true
     }
   },
   beforeRouteUpdate (to, from, next) {
+    if (to.meta.footerShow === false) {
+      this.footerShow = false
+    } else {
+      this.footerShow = true
+    }
     if (to.meta.transitionName && to.meta.transitionName === 'slide') {
       let isBack = this.$router.isBack
       this.mode = ''
@@ -66,7 +72,11 @@ export default {
     }, 60)
   },
   mounted () {
-    
+    if (this.$route.meta.footerShow === false) {
+      this.footerShow = false
+    } else {
+      this.footerShow = true
+    }
   },
   components:{
     svgIcon

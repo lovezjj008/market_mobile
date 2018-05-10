@@ -1,13 +1,17 @@
 <template>
   <div ref="searchlist">
-     
+      <searchlist-head fixed></searchlist-head>
+      <div class="searchlist-contain">
+         <svg-component v-for = "n in 20" :key= "n"></svg-component> 
+      </div>
   </div>
 </template>
 
 <script>
-// import searchIteam from '@/components/searchiteam'
 import { Loadmore } from 'mint-ui';
 import { getsearchlist } from "@/servies/search";
+import svgComponent from '@/components/skeletonScreen/goodslist'
+import searchlistHead from '@/components/searchlistheader'
 export default {
   data() {
     return {
@@ -19,8 +23,9 @@ export default {
 		allLoaded: false
     };
   },
-  comments: {
-    
+  components: {
+    svgComponent,
+    searchlistHead
   },
   mounted () {
     this.loadqureData()
@@ -36,7 +41,7 @@ export default {
         }
     },
     loadqureData(id) {
-        let url = '/mall-basedoc/search/mallProduct/allMallProduct?searchType=3'
+        let url = '/mall-basedoc/search/mallProduct/allMallProduct?searchType=1'
         let data = {
             'channelId': 0,
 			'keyWord': '电子', // 关键字
@@ -45,12 +50,16 @@ export default {
 			'cateCode':'',
         }
         getsearchlist(url, data).then(response => {
-            debugger
+            // debugger
         })
     }
   }
 
 };
 </script>
+<style lang="less" scoped>
+    .searchlist-contain{
+        // margin-top: 2.5rem;
+    }
+</style>
 
-<style>
