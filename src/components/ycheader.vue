@@ -5,9 +5,13 @@
     <div class="mint-header-button is-left">
       <slot name="left"></slot>
     </div>
-    <h1 class="mint-header-title" v-text="title"></h1>
+    <h1 v-if= "title" class="mint-header-title" v-text="title"></h1>
+    <div class="mint-header-content">
+       <slot name="center">
+       </slot>
+    </div>
     <div class="mint-header-button is-right">
-      <slot name="right">dsfs</slot>
+      <slot name="right"></slot>
     </div>
   </header>
 </template>
@@ -37,3 +41,8 @@ export default {
   }
 };
 </script>
+<style lang = "css">
+  .mint-header{
+    background: #ea0808;
+  }
+</style>

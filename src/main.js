@@ -10,6 +10,7 @@ import './css/common.less'
 import httpServer from '@/config/httpServer'
 import App from './App'
 import FastClick from 'fastclick'
+import './filter'
 
 Vue.prototype.axios = httpServer
 Vue.use(MintUI)

@@ -95,6 +95,7 @@ export default {
 </script>
 
 <style scoped lang="less">
+
   .child-view {
     position: absolute;
     transition: all .3s cubic-bezier(.55,0,.1,1);

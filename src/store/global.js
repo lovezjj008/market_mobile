@@ -1,11 +1,13 @@
 import store from 'store'
 const SELECTNAV = 'SELECTNAV'
 const GETCATEGORYLIST = 'GETCATEGORYLIST'
+const CHANGEMARK = 'CHANGEMARK'
 
 const global = {
   state: {
     footernav_select: store.get('navstatus') || 'home',
-    categoryList: []
+    categoryList: [],
+    markShow: false
   },
   mutations: {
     [SELECTNAV] (state, status) {
@@ -14,6 +16,9 @@ const global = {
     },
     [GETCATEGORYLIST] (state, data) {
       state.categoryList = data
+    },
+    [CHANGEMARK] (state, data) {
+      state.markShow = data
     }
   },
   actions: {
@@ -22,6 +27,9 @@ const global = {
     },
     getcategory ({ commit, state }, data) {
       commit(GETCATEGORYLIST, data)
+    },
+    markchange ({ commit, state }, data) {
+      commit(CHANGEMARK, data)
     }
   }
 }
