@@ -1,6 +1,6 @@
 import Vue from 'vue'
 
-function formatMoney(number, places, symbol, thousand, decimal) {
+function formatMoney (number, places, symbol, thousand, decimal) {
   number = number || 0
   places = !isNaN(places = Math.abs(places)) ? places : 2
   symbol = symbol !== undefined ? symbol : '￥'

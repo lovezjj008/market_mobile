@@ -3,7 +3,7 @@
       <ycHeader >
             <mt-button icon="back" slot="left" @click = "routerFn">返回</mt-button>
             <div class="searchtitle ellipsis" slot="center">
-                <span class="key">电子计算机</span>
+                <span class="key">{{keyword}}</span>
                 <span class="searchico fa fa-search"></span>
             </div>
             <div slot="right" class="searchmore">
@@ -19,7 +19,8 @@
               <svg-component  v-for = "n in 8" :key= "n"></svg-component> 
           </div>
          <div class="searchlist-box">
-             <ul>
+            <mt-loadmore :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" ref="loadmore" :auto-fill = 'false'>
+             <ul >
                  <li class="list-li" v-for = "iteam in listData" :key = "iteam.is">
                      <div class="clear listData-iteam">
                          <div class="listData-img pull-left">
@@ -39,6 +40,7 @@
                     
                  </li>
              </ul>
+            </mt-loadmore>
          </div>
       </div>
       <popup-mark></popup-mark>
@@ -61,7 +63,8 @@ export default {
   		listData:[],
 		moreShow:true,
         allLoaded: false,
-        popupVisible: false
+        popupVisible: false,
+        keyword: '电子'
     };
   },
   components: {
@@ -69,12 +72,14 @@ export default {
     ycHeader,
     popupMark
   },
-  mounted () {
+  created() {
     var self = this
-    this.loadqureData()
     Bus.$on('markClick', function (state) {
         self.popupVisible = false
     })
+  },
+  mounted () {
+    this.loadqureData()
   },
   watch: {
     popupVisible (val) {
@@ -90,16 +95,15 @@ export default {
         this.$router.isBack = true
         this.$router.go(-1)
     },
-    loadBottom (id) {
-        if((this.pageIndex +1) < this.totalPage) {
-            this.pageIndex++
-            this.loadqureData(id)
+    loadBottom ( ) {
+        if((this.pageIndex +1) === this.totalPage) {
+              this.allLoaded = true
         }else{
-            this.allLoaded = true
-            this.$broadcast('onBottomLoaded', id);
-        }
+            this.pageIndex++
+            this.loadqureData()
+        }        
     },
-    loadqureData(id) {
+    loadqureData () {
         let url = '/mall-basedoc/search/mallProduct/allMallProduct?searchType=1'
         let data = {
             'channelId': 0,
@@ -111,11 +115,13 @@ export default {
         getsearchlist(url, data).then(response => {
             if(response.status === 200) {
                 if (response.data.success) {
-                    this.listData = response.data.result.data
+                    this.totalPage = response.data.result.totalPage
+                    this.listData = this.listData.concat(response.data.result.data)
                 } else {
                     Toast(response.data.resultMsg || '网络异常')
                 }
             }
+            this.$refs.loadmore.onBottomLoaded();
         })
     }
   }
@@ -151,6 +157,7 @@ export default {
        box-sizing: border-box;
        border: 1px solid #dddddd;
        border-radius: 1.2rem;
+       height: 1.2rem;
        background: #ffffff;
        color: #999;
        line-height: 1.2rem;

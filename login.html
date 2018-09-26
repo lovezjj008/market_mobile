@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>开发调试首页dev</title>
+</head>
+<body>
+    <h1>开发调试首页</h1>
+    <h2>真正的首页在freemakret之下</h2>
+    <a  onclick="relogin()" style="cursor: pointer; ">重新登录</a>
+    <a style="cursor: pointer; " href="./index.html">进入页面</a>
+
+<script >
+   function relogin(){
+        window.localStorage.clear();
+        window.location.href = '/yuncai/mobile/login.html?r='+window.location.href;
+    }
+</script>
+</body>
+</html>
